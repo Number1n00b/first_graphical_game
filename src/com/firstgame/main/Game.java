@@ -1,6 +1,5 @@
 package com.firstgame.main;
 
-import javax.management.StandardEmitterMBean;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
@@ -298,11 +297,12 @@ public class Game extends Canvas implements Runnable
             //System.out.println("FPS: " + frames);
             for(GameObject temp : handler.object)
             {
-               if( temp.id == ID.Player )
+               //todo - remove this debug if needed
+               /*if( temp.id == ID.Player )
                {
                   System.out.println("Player pos: (" + temp.getX() + ", " + temp.getY() + ")");
                   System.out.println("Player velocity: (" + temp.getVelX() + ", " + temp.getVelY() + ")\n");
-               }
+               }*/
             }
             frames = 0;
          }

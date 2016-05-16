@@ -79,6 +79,16 @@ public class Player extends GameObject
                {
                   Game.hud.incrementHealth(-10);
                }
+               else if (temp.getId() == ID.EnemyBossBullet)
+               {
+                  Game.hud.incrementHealth(-50);
+                  Game.removeQue.add(temp);
+               }
+               else if ( temp.getId() == ID.HealthUp )
+               {
+                  Game.hud.incrementHealth(100);
+                  Game.removeQue.add(temp);
+               }
                else
                {
                   Game.hud.incrementHealth(-2);

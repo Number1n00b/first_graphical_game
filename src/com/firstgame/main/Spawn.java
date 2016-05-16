@@ -27,6 +27,11 @@ public class Spawn
    {
       scoreKeep++;
 
+      if (r.nextInt(100) == 0)
+      {
+         Game.objQueue.add(new HealthUp(Game.randomPoint('w'), Game.randomPoint('h'), ID.HealthUp, handler));
+      }
+
       if(scoreKeep >= 250)
       {
          scoreKeep = 0;
@@ -58,7 +63,7 @@ public class Spawn
                Game.objQueue.add(new FastEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
                Game.objQueue.add(new FastEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
             break;
-            case 8:
+            case 10:
                handler.clearAll();
                Game.gameState = Game.STATE.Win;
                Game.reset();
