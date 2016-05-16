@@ -52,6 +52,17 @@ public class Menu extends MouseAdapter
             if (mouseOver(mx, my, Game.WIDTH / 2 - 100, Game.HEIGHT / 3 + 300, 200, 64)) {
                System.exit(0);
             }
+
+            if( mouseOver(mx, my, 10, Game.HEIGHT - 45, 100, 40) )
+            {
+               //remove all objects, and readd the player.. then reset the game.
+               for( GameObject o : handler.object )
+               {
+                  Game.removeQue.add(o);
+               }
+
+               Game.reset();
+            }
          }
          else if( Game.gameState == Game.STATE.Win )
          {
@@ -102,6 +113,9 @@ public class Menu extends MouseAdapter
          g.setColor(Color.white);
          g.drawString("Quit", Game.WIDTH / 2 - 35, Game.HEIGHT / 3 + 340);
 
+         g.setColor(Color.red);
+         g.drawString("Reset", 15, Game.HEIGHT - 15);
+
          g.setColor(Color.white);
          g.drawRect(Game.WIDTH / 2 - 100, Game.HEIGHT / 3, 200, 64);
 
@@ -110,6 +124,9 @@ public class Menu extends MouseAdapter
 
          g.setColor(Color.white);
          g.drawRect(Game.WIDTH / 2 - 100, Game.HEIGHT / 3 + 300, 200, 64);
+
+         g.setColor(Color.red);
+         g.drawRect(10, Game.HEIGHT - 45, 100, 40);
       }
       else if (Game.gameState == Game.STATE.Help)
       {

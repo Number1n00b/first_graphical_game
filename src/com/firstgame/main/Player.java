@@ -1,18 +1,22 @@
 package com.firstgame.main;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Player extends GameObject
 {
    private Color playerColour;
 
+   private boolean collision = false;
+
    private Handler handler;
 
    private Random r = new Random();
+
+   private int shootDelay = 0;
+   private int MAX_DELAY = 5;
 
    public Player(int x, int y, ID id, Handler handler)
    {
@@ -48,6 +52,9 @@ public class Player extends GameObject
    @Override
    public void tick()
    {
+      shootDelay--;
+      shootDelay = (int)Game.clamp((float)shootDelay, 0, MAX_DELAY);
+
       x += velX;
       y += velY;
 
@@ -70,20 +77,86 @@ public class Player extends GameObject
    {
       for(GameObject temp : handler.object)
       {
-         if(Game.isEnemy(temp.getId()))
-         {
-            //collision code!
-            if(this.getBounds().intersects(temp.getBounds()))
-            {
-               if(temp.getId() == ID.SmartEnemy)
-               {
-                  Game.hud.incrementHealth(-10);
-               }
-               else
-               {
-                  Game.hud.incrementHealth(-2);
+         if(collision) {
+            if (Game.isEnemy(temp.getId())) {
+               //collision code!
+               if (this.getBounds().intersects(temp.getBounds())) {
+                  if (temp.getId() == ID.SmartEnemy) {
+                     Game.hud.incrementHealth(-10);
+                  } else if (temp.getId() == ID.EnemyBossBullet) {
+                     Game.hud.incrementHealth(-50);
+                     Game.removeQue.add(temp);
+                  } else if (temp.getId() == ID.HealthUp) {
+                     Game.hud.incrementHealth(100);
+                     Game.removeQue.add(temp);
+                  } else if (temp.getId() == ID.BossEnemy) {
+                     Game.hud.incrementHealth(-1000);
+                  } else {
+                     Game.hud.incrementHealth(-2);
+                  }
                }
             }
+         }
+      }
+   }
+
+
+   public void shoot(boolean[] dir)
+   {
+      boolean UP = dir[0];
+      boolean DOWN = dir[1];
+      boolean LEFT = dir[2];
+      boolean RIGHT = dir[3];
+
+      if( shootDelay <= 0 )
+      {
+         shootDelay = MAX_DELAY;
+
+         float localX = x + xSize/2 - 8;
+         float localY = y + ySize/2 - 8;
+
+         LinkedList<GameObject> objQueue;
+
+         if(id == ID.Player_Demo)
+         {
+            objQueue = Game.menuObjQueue;
+         }
+         else
+         {
+            objQueue = Game.objQueue;
+         }
+
+         if( UP && LEFT )
+         {
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, -5, -5, ID.PlayerBullet, handler, playerColour));
+         }
+         else if( UP && RIGHT )
+         {
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, 5, -5, ID.PlayerBullet, handler, playerColour));
+         }
+         else if( DOWN && LEFT )
+         {
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, -5, 5, ID.PlayerBullet, handler, playerColour));
+         }
+         else if( DOWN && RIGHT )
+         {
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, 5, 5, ID.PlayerBullet, handler, playerColour));
+         }
+         else if( UP )
+         {
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, 0, -5, ID.PlayerBullet, handler, playerColour));
+         }
+         else if( DOWN )
+         {
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, 0, 5, ID.PlayerBullet, handler, playerColour));
+         }
+         else if( LEFT )
+         {
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, -5, 0, ID.PlayerBullet, handler, playerColour));
+         }
+         else if( RIGHT )
+         {
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, 5, 0, ID.PlayerBullet, handler, playerColour));
          }
       }
    }

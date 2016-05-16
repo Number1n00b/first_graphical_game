@@ -17,6 +17,9 @@ public class SmartEnemy extends GameObject
    {
       super(x, y, id);
 
+      MAX_HEALTH = 50;
+      health = 50;
+
       this.handler = handler;
 
       for(GameObject ob : handler.object)
@@ -40,6 +43,11 @@ public class SmartEnemy extends GameObject
    @Override
    public void tick()
    {
+      if(this.health <= 0 )
+      {
+         Game.removeQue.add(this);
+      }
+
       float diffX = x - player.getX();
       float diffY = y - player.getY();
 
@@ -60,6 +68,14 @@ public class SmartEnemy extends GameObject
    @Override
    public void render(Graphics g)
    {
+      //Outline box
+      g.setColor(Color.gray);
+      g.fillRect((int)x-5, (int)(y+ySize+5), xSize+5, 5);
+
+      //Health bar
+      g.setColor(Color.red);
+      g.fillRect((int)x-5, (int)(y+ySize+5), (int)(((float)health/(float)MAX_HEALTH) * (xSize+5)), 5);
+
       g.setColor(enemyColour);
 
       g.fillOval((int)x, (int)y, xSize, ySize);

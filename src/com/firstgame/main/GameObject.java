@@ -20,6 +20,10 @@ public abstract class GameObject
    protected int xSize;
    protected int ySize;
 
+   //Health
+   protected int health = 30;
+   protected int MAX_HEALTH = health;
+
    public GameObject(int x, int y, ID id)
    {
       this.x = x;
@@ -80,6 +84,11 @@ public abstract class GameObject
       return this.accY;
    }
 
+   public int getHealth()
+   {
+      return health;
+   }
+
    //setters
    public void setX(float x)
    {
@@ -125,5 +134,18 @@ public abstract class GameObject
    public void setAccY(int accY)
    {
       this.accY = accY;
+   }
+
+   public void setHealth(int health)
+   {
+      this.health = health;
+   }
+
+   public void incrementHealth(int increment)
+   {
+      System.out.println("Increment called! from/to: " + health + "/" + (health+increment));
+
+      health += increment;
+      health = (int)Game.clamp((float)health, 0, MAX_HEALTH);
    }
 }

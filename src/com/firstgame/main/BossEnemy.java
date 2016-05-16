@@ -18,6 +18,9 @@ public class BossEnemy extends GameObject
    {
       super(x, y, id);
 
+      health = 50;
+      MAX_HEALTH = 50;
+
       velX = 0;
       velY = 5;
 
@@ -36,6 +39,18 @@ public class BossEnemy extends GameObject
    @Override
    public void tick()
    {
+      if(this.health <= 0 )
+      {
+         Game.gameState = Game.STATE.Win;
+
+         for( GameObject o : handler.object )
+         {
+            Game.removeQue.add(o);
+         }
+
+         Game.reset();
+      }
+
       x += velX;
       y += velY;
 
@@ -70,6 +85,17 @@ public class BossEnemy extends GameObject
    @Override
    public void render(Graphics g)
    {
+      //Outline box
+      g.setColor(Color.gray);
+      g.fillRect(Game.WIDTH - 215, 15, 200, 32);
+
+      g.drawString("Boss Health!", Game.WIDTH - 215, 64);
+
+      //Health bar
+      g.setColor(Color.red);
+      g.fillRect(Game.WIDTH - 215, 15, (int)(((float)health/(float)MAX_HEALTH) * 200), 32);
+
+
       g.setColor(enemyColour);
 
       g.fillRect((int)x, (int)y, xSize, ySize);

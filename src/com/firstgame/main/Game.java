@@ -1,6 +1,5 @@
 package com.firstgame.main;
 
-import javax.management.StandardEmitterMBean;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
@@ -80,7 +79,7 @@ public class Game extends Canvas implements Runnable
       //handler.addObject(new Player(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.Player));
 
       //Add demo player to game.
-      menuHandler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player_Demo, handler));
+      menuHandler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player_Demo, menuHandler));
    }
 
    public synchronized void start()
@@ -247,7 +246,7 @@ public class Game extends Canvas implements Runnable
 
    public static boolean isEnemy(ID id)
    {
-      return ( id != ID.Player && id != ID.Player_Demo && id != ID.Trail && id != ID.PlayerBullet );
+      return ( id != ID.Player && id != ID.Player_Demo && id != ID.Trail && id != ID.PlayerBullet && id != ID.BossEnemy);
    }
 
    public static void reset()
@@ -259,7 +258,16 @@ public class Game extends Canvas implements Runnable
       spawner.setKeep(250);
    }
 
+   public static void resetAll()
+   {
+      hud.setLevel(0);
+      hud.setScore(0);
+      hud.incrementHealth(200);
 
+      spawner.setKeep(250);
+
+
+   }
 
    public void run()
    {
@@ -298,11 +306,12 @@ public class Game extends Canvas implements Runnable
             //System.out.println("FPS: " + frames);
             for(GameObject temp : handler.object)
             {
-               if( temp.id == ID.Player )
+               //todo - remove this debug if needed
+               /*if( temp.id == ID.Player )
                {
                   System.out.println("Player pos: (" + temp.getX() + ", " + temp.getY() + ")");
                   System.out.println("Player velocity: (" + temp.getVelX() + ", " + temp.getVelY() + ")\n");
-               }
+               }*/
             }
             frames = 0;
          }

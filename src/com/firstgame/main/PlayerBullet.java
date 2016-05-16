@@ -5,16 +5,19 @@ import java.util.Random;
 
 public class PlayerBullet extends GameObject
 {
-   private static Color enemyColour = Game.PLAYER_ONE_COLOR;
+   private Color color;
 
    private Random r = new Random();
 
    private Handler handler;
 
-   public PlayerBullet(int x, int y, int velX, int velY, ID id, Handler handler)
+   private int playerDamage = 10;
+
+   public PlayerBullet(int x, int y, int velX, int velY, ID id, Handler handler, Color col)
    {
       super(x, y, id);
 
+      this.color = col;
       this.velX = velX;
       this.velY = velY;
       this.handler = handler;
@@ -46,13 +49,29 @@ public class PlayerBullet extends GameObject
 
    public void collision()
    {
-
+      if(this.id != ID.Player_Demo) {
+         for (GameObject o : handler.object) {
+            try {
+               if (this.getBounds().intersects(o.getBounds())) {
+                  if (Game.isEnemy(o.getId()) && !(o.getId() == ID.EnemyBossBullet)) {
+                     o.incrementHealth(-playerDamage);
+                     Game.removeQue.add(this);
+                  } else if (o.getId() == ID.EnemyBossBullet) {
+                     Game.removeQue.add(o);
+                  } else if (o.getId() == ID.BossEnemy) {
+                     o.incrementHealth(-(playerDamage / 2));
+                     Game.removeQue.add(this);
+                  }
+               }
+            } catch (NullPointerException e) {/*System.out.println("np Ex");*/}
+         }
+      }
    }
 
    @Override
    public void render(Graphics g)
    {
-      g.setColor(enemyColour);
+      g.setColor(color);
 
       g.fillOval((int)x, (int)y, xSize, ySize);
    }

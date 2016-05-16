@@ -34,7 +34,13 @@ public class BasicEnemy extends GameObject
    }
 
    @Override
-   public void tick() {
+   public void tick()
+   {
+      if(this.health <= 0 )
+      {
+         Game.removeQue.add(this);
+      }
+
       x += velX;
       y += velY;
 
@@ -47,6 +53,14 @@ public class BasicEnemy extends GameObject
    @Override
    public void render(Graphics g)
    {
+      //Outline box
+      g.setColor(Color.gray);
+      g.fillRect((int)x-5, (int)(y+ySize+5), xSize+5, 5);
+
+      //Health bar
+      g.setColor(Color.red);
+      g.fillRect((int)x-5, (int)(y+ySize+5), (int)(((float)health/(float)MAX_HEALTH) * (xSize+5)), 5);
+
       g.setColor(enemyColour);
 
       g.fillRect((int)x, (int)y, xSize, ySize);
