@@ -87,6 +87,7 @@ public class Player extends GameObject
                else if ( temp.getId() == ID.HealthUp )
                {
                   Game.hud.incrementHealth(100);
+                  Game.hud.setScore(Game.hud.getScore()+50);                  
                   Game.removeQue.add(temp);
                }
                else
