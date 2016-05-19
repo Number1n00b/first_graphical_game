@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Game extends Canvas implements Runnable
 {
-   public static final int WIDTH = 1080;
+   public static final int WIDTH = 960;
    public static final int HEIGHT = WIDTH / 12 * 9; //810
    public static final int PLAYER_BASE_SPEED = 10;
    public static final Color PLAYER_ONE_COLOR = Color.blue;
