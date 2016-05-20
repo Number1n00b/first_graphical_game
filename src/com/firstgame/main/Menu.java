@@ -55,7 +55,7 @@ public class Menu extends MouseAdapter
 
             if( mouseOver(mx, my, 10, Game.HEIGHT - 45, 100, 40) )
             {
-               //remove all objects, and readd the player.. then reset the game.
+               //remove all objects, and re-add the player.. then reset the game.
                for( GameObject o : handler.object )
                {
                   Game.removeQue.add(o);
@@ -113,7 +113,14 @@ public class Menu extends MouseAdapter
          g.setColor(Color.white);
          g.drawString("Quit", Game.WIDTH / 2 - 35, Game.HEIGHT / 3 + 340);
 
-         g.setColor(Color.red);
+         if( game.hud.getScore() == 0 )
+         {
+            g.setColor(Color.green);
+         }
+         else
+         {
+            g.setColor(Color.red);
+         }
          g.drawString("Reset", 15, Game.HEIGHT - 15);
 
          g.setColor(Color.white);
@@ -125,7 +132,14 @@ public class Menu extends MouseAdapter
          g.setColor(Color.white);
          g.drawRect(Game.WIDTH / 2 - 100, Game.HEIGHT / 3 + 300, 200, 64);
 
-         g.setColor(Color.red);
+         if( game.hud.getScore() == 0 )
+         {
+            g.setColor(Color.green);
+         }
+         else
+         {
+            g.setColor(Color.red);
+         }
          g.drawRect(10, Game.HEIGHT - 45, 100, 40);
       }
       else if (Game.gameState == Game.STATE.Help)

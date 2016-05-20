@@ -143,7 +143,7 @@ public abstract class GameObject
 
    public void incrementHealth(int increment)
    {
-      System.out.println("Increment called! from/to: " + health + "/" + (health+increment));
+      //System.out.println("Increment called! from/to: " + health + "/" + (health+increment));
 
       health += increment;
       health = (int)Game.clamp((float)health, 0, MAX_HEALTH);

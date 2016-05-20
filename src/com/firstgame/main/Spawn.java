@@ -41,7 +41,6 @@ public class Spawn
          {
             case 1:
                //Add player and enemies to game.
-               Game.objQueue.add(new BossEnemy(Game.WIDTH/2-100, -200, ID.BossEnemy, handler));
                Game.objQueue.add(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
 
                Game.objQueue.add(new BasicEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
@@ -57,7 +56,7 @@ public class Spawn
                Game.objQueue.add(new SmartEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.SmartEnemy, handler));
             break;
             case 5:
-
+               Game.objQueue.add(new BossEnemy(Game.WIDTH/2-100, -200, ID.BossEnemy, handler));
             break;
             case 6:
                Game.objQueue.add(new SmartEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.SmartEnemy, handler));

@@ -11,7 +11,7 @@ public class PlayerBullet extends GameObject
 
    private Handler handler;
 
-   private int playerDamage = 10;
+   private int playerDamage = 8;
 
    public PlayerBullet(int x, int y, int velX, int velY, ID id, Handler handler, Color col)
    {

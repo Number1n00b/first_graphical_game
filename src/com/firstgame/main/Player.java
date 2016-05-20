@@ -9,14 +9,14 @@ public class Player extends GameObject
 {
    private Color playerColour;
 
-   private boolean collision = false;
+   private boolean collision = true;
 
    private Handler handler;
 
    private Random r = new Random();
 
    private int shootDelay = 0;
-   private int MAX_DELAY = 5;
+   private int MAX_DELAY = 20;
 
    public Player(int x, int y, ID id, Handler handler)
    {
@@ -75,9 +75,16 @@ public class Player extends GameObject
 
    private void collision()
    {
+      try{
       for(GameObject temp : handler.object)
       {
          if(collision) {
+            if (this.getBounds().intersects(temp.getBounds())) {
+               if (temp.getId() == ID.BossEnemy) 
+               {
+                  Game.hud.incrementHealth(-1000);
+               }
+            }
             if (Game.isEnemy(temp.getId())) {
                //collision code!
                if (this.getBounds().intersects(temp.getBounds())) {
@@ -89,8 +96,6 @@ public class Player extends GameObject
                   } else if (temp.getId() == ID.HealthUp) {
                      Game.hud.incrementHealth(100);
                      Game.removeQue.add(temp);
-                  } else if (temp.getId() == ID.BossEnemy) {
-                     Game.hud.incrementHealth(-1000);
                   } else {
                      Game.hud.incrementHealth(-2);
                   }
@@ -98,6 +103,7 @@ public class Player extends GameObject
             }
          }
       }
+      }catch(Exception e){};
    }
 
 
@@ -111,6 +117,9 @@ public class Player extends GameObject
       if( shootDelay <= 0 )
       {
          shootDelay = MAX_DELAY;
+
+         int sp = 7;
+         int diagSp = (int)Math.round(Math.sqrt( (sp*sp)/2 ));
 
          float localX = x + xSize/2 - 8;
          float localY = y + ySize/2 - 8;
@@ -128,35 +137,35 @@ public class Player extends GameObject
 
          if( UP && LEFT )
          {
-            objQueue.add(new PlayerBullet((int)localX, (int)localY, -5, -5, ID.PlayerBullet, handler, playerColour));
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, -diagSp, -diagSp, ID.PlayerBullet, handler, playerColour));
          }
          else if( UP && RIGHT )
          {
-            objQueue.add(new PlayerBullet((int)localX, (int)localY, 5, -5, ID.PlayerBullet, handler, playerColour));
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, diagSp, -diagSp, ID.PlayerBullet, handler, playerColour));
          }
          else if( DOWN && LEFT )
          {
-            objQueue.add(new PlayerBullet((int)localX, (int)localY, -5, 5, ID.PlayerBullet, handler, playerColour));
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, -diagSp, diagSp, ID.PlayerBullet, handler, playerColour));
          }
          else if( DOWN && RIGHT )
          {
-            objQueue.add(new PlayerBullet((int)localX, (int)localY, 5, 5, ID.PlayerBullet, handler, playerColour));
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, diagSp, diagSp, ID.PlayerBullet, handler, playerColour));
          }
          else if( UP )
          {
-            objQueue.add(new PlayerBullet((int)localX, (int)localY, 0, -5, ID.PlayerBullet, handler, playerColour));
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, 0, -sp, ID.PlayerBullet, handler, playerColour));
          }
          else if( DOWN )
          {
-            objQueue.add(new PlayerBullet((int)localX, (int)localY, 0, 5, ID.PlayerBullet, handler, playerColour));
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, 0, sp, ID.PlayerBullet, handler, playerColour));
          }
          else if( LEFT )
          {
-            objQueue.add(new PlayerBullet((int)localX, (int)localY, -5, 0, ID.PlayerBullet, handler, playerColour));
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, -sp, 0, ID.PlayerBullet, handler, playerColour));
          }
          else if( RIGHT )
          {
-            objQueue.add(new PlayerBullet((int)localX, (int)localY, 5, 0, ID.PlayerBullet, handler, playerColour));
+            objQueue.add(new PlayerBullet((int)localX, (int)localY, sp, 0, ID.PlayerBullet, handler, playerColour));
          }
       }
    }
