@@ -40,6 +40,7 @@ public class Spawn
          switch(hud.getLevel())
          {
             case 1:
+               Game.objQueue.add(new BossEnemy(Game.WIDTH/2-200, -200, ID.BossEnemy, handler));
                //Add player and enemies to game.
                Game.objQueue.add(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
 
@@ -56,7 +57,7 @@ public class Spawn
                Game.objQueue.add(new SmartEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.SmartEnemy, handler));
             break;
             case 5:
-               Game.objQueue.add(new BossEnemy(Game.WIDTH/2-100, -200, ID.BossEnemy, handler));
+               
             break;
             case 6:
                Game.objQueue.add(new SmartEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.SmartEnemy, handler));

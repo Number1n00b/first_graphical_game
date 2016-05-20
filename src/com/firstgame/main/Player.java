@@ -9,14 +9,14 @@ public class Player extends GameObject
 {
    private Color playerColour;
 
-   private boolean collision = true;
+   private boolean collision = false;
 
    private Handler handler;
 
    private Random r = new Random();
 
    private int shootDelay = 0;
-   private int MAX_DELAY = 20;
+   private int MAX_DELAY = 5;
 
    public Player(int x, int y, ID id, Handler handler)
    {

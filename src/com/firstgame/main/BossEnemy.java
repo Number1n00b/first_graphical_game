@@ -79,7 +79,7 @@ public class BossEnemy extends GameObject
       }
 
       //if( (y<= 0) || (y >= Game.HEIGHT - ySize) ) velY *= -1;
-      if( (x<= 0) || (x >= Game.WIDTH - xSize) ) velX *= -1;
+      if( (x<= 0) || (x >= (Game.WIDTH-xSize-5)) ) velX *= -1;
    }
 
    @Override

@@ -157,7 +157,7 @@ public class Menu extends MouseAdapter
          g.drawRect(Game.WIDTH / 2 - 100, Game.HEIGHT / 3 + 300, 200, 64);
 
          g.setFont(font3);
-         g.drawString("Use WASD keys to move the blue cube and dodge enemies!", 250, 380);
+         g.drawString("Use WASD keys to move the blue cube and dodge enemies!", 200, 380);
       }
       else if (Game.gameState == Game.STATE.Game_Over)
       {
