@@ -9,6 +9,10 @@ public class Game extends Canvas implements Runnable
 {
    public static final int WIDTH = 960;
    public static final int HEIGHT = WIDTH / 12 * 9; //810
+
+   public static final int RENDER_WIDTH = WIDTH;
+   public static final int RENDER_HEIGHT = HEIGHT;
+
    public static final int PLAYER_BASE_SPEED = 10;
    public static final Color PLAYER_ONE_COLOR = Color.blue;
    private Color BACKGROUND_COLOUR = Color.black;
@@ -43,9 +47,6 @@ public class Game extends Canvas implements Runnable
    public static LinkedList<GameObject> menuObjQueue;
    public static LinkedList<GameObject> menuRemoveQueue;
 
-   public int num_enemys = 15;
-
-   Player demo;
 
    /**
     * Set up the game state here.
@@ -251,6 +252,7 @@ public class Game extends Canvas implements Runnable
 
    public static void reset()
    {
+      System.out.println("resetting");
       hud.setLevel(0);
       hud.setScore(0);
       hud.incrementHealth(200);

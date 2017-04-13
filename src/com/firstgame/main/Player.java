@@ -9,7 +9,7 @@ public class Player extends GameObject
 {
    private Color playerColour;
 
-   private boolean collision = false;
+   private boolean collision = true;
 
    private Handler handler;
 
@@ -28,6 +28,9 @@ public class Player extends GameObject
 
       xSize = 42;
       ySize = 42;
+
+      accX = 0;
+      accY = 1;
 
       if(id == ID.Player)
       {
@@ -55,6 +58,13 @@ public class Player extends GameObject
       shootDelay--;
       shootDelay = (int)Game.clamp((float)shootDelay, 0, MAX_DELAY);
 
+      //velX += accX;
+      //velY += accY;
+
+      velX = Game.clamp(velX, -100, 100);
+      velY = Game.clamp(velY, -100, 100);
+
+
       x += velX;
       y += velY;
 
@@ -63,7 +73,7 @@ public class Player extends GameObject
 
       if(id == ID.Player_Demo)
       {
-         Game.menuObjQueue.add(new Trail((int)x, (int)y, playerColour, xSize, ySize, 0.03f, ID.Trail, handler));
+         //Game.menuObjQueue.add(new Trail((int)x, (int)y, playerColour, xSize, ySize, 0.03f, ID.Trail, handler));
       }
       else
       {

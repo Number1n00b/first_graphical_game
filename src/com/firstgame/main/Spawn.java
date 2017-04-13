@@ -27,7 +27,7 @@ public class Spawn
    {
       scoreKeep++;
 
-      if (r.nextInt(100) == 0)
+      if (r.nextInt(200) == 0)
       {
          Game.objQueue.add(new HealthUp(Game.randomPoint('w'), Game.randomPoint('h'), ID.HealthUp, handler));
       }
@@ -40,11 +40,15 @@ public class Spawn
          switch(hud.getLevel())
          {
             case 1:
-               Game.objQueue.add(new BossEnemy(Game.WIDTH/2-200, -200, ID.BossEnemy, handler));
                //Add player and enemies to game.
                Game.objQueue.add(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
+               Game.objQueue.add(new BossEnemy(Game.WIDTH/2-200, -200, ID.BossEnemy, handler));
 
                Game.objQueue.add(new BasicEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
+               //Game.objQueue.add(new BasicEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
+               //Game.objQueue.add(new BasicEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
+               //Game.objQueue.add(new BasicEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
+               //Game.objQueue.add(new BasicEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
             break;
             case 2:
                Game.objQueue.add(new BasicEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.BaiscEnemy, handler));
@@ -57,7 +61,7 @@ public class Spawn
                Game.objQueue.add(new SmartEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.SmartEnemy, handler));
             break;
             case 5:
-               
+
             break;
             case 6:
                Game.objQueue.add(new SmartEnemy(Game.randomPoint('w'), Game.randomPoint('h'), ID.SmartEnemy, handler));

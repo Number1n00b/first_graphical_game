@@ -22,15 +22,7 @@ public class Menu extends MouseAdapter
       int my = e.getY();
 
       if(Game.gameState != Game.STATE.Game) {
-         //Play Button
-         if (mouseOver(mx, my, Game.WIDTH / 2 - 100, Game.HEIGHT / 3, 200, 64)) {
-            Game.gameState = Game.STATE.Game;
-         }
 
-         //Help button
-         if (mouseOver(mx, my, Game.WIDTH / 2 - 100, Game.HEIGHT / 3 + 150, 200, 64)) {
-            Game.gameState = Game.STATE.Help;
-         }
 
          if (Game.gameState == Game.STATE.Help)
          {
@@ -51,6 +43,10 @@ public class Menu extends MouseAdapter
          {
             if (mouseOver(mx, my, Game.WIDTH / 2 - 100, Game.HEIGHT / 3 + 300, 200, 64)) {
                System.exit(0);
+            }
+
+            if (mouseOver(mx, my, Game.WIDTH / 2 - 100, Game.HEIGHT / 3, 200, 64)) {
+               Game.gameState = Game.STATE.Game;
             }
 
             if( mouseOver(mx, my, 10, Game.HEIGHT - 45, 100, 40) )

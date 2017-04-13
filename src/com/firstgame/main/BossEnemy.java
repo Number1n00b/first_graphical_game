@@ -18,8 +18,8 @@ public class BossEnemy extends GameObject
    {
       super(x, y, id);
 
-      health = 50;
-      MAX_HEALTH = 50;
+      health = 100;
+      MAX_HEALTH = 100;
 
       velX = 0;
       velY = 5;

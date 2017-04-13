@@ -36,6 +36,18 @@ public class BasicEnemy extends GameObject
    @Override
    public void tick()
    {
+      if( r.nextInt(50000) <= 500 )
+      {
+         velX = r.nextInt(3)+8;
+         velY = r.nextInt(3)+8;
+      }
+
+      if( r.nextInt(50000) <= 100 )
+      {
+         velX = -velX;
+         velY = -velY;
+      }
+
       if(this.health <= 0 )
       {
          Game.removeQue.add(this);
@@ -43,6 +55,9 @@ public class BasicEnemy extends GameObject
 
       x += velX;
       y += velY;
+
+      x = Game.clamp(x, 0, Game.WIDTH - xSize);
+      y = Game.clamp(y, 0, Game.HEIGHT - ySize);
 
       if ((y <= 0) || (y >= Game.HEIGHT - ySize)) velY *= -1;
       if ((x <= 0) || (x >= Game.WIDTH - xSize)) velX *= -1;
